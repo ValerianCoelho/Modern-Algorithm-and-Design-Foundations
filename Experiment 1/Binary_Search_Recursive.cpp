@@ -1,7 +1,9 @@
 #include<iostream>
 using namespace std;
 int pos;
-void insertion_sort(int array[], int len) {
+
+template <class T>
+void insertion_sort(T array[], int len) {
     int i, j, k;
     for(i=1; i<len; i++) {
         k = array[i];
@@ -14,7 +16,8 @@ void insertion_sort(int array[], int len) {
     }
 }
 
-int binarySearch(int array[], int low, int high, int key) {
+template <class T>
+int binarySearch(T array[], int low, int high, T key) {
     int mid;
     mid = (low+high)/2;
     if(low > high)
@@ -34,14 +37,15 @@ int binarySearch(int array[], int low, int high, int key) {
         return pos;
 }
 
-void print_array(int array[], int len) {
+template <class T>
+void print_array(T array[], int len) {
     for(int i=0; i<len; i++)
         cout << array[i] << " ";
 }
 
 int main() {
-    int len;
-    int array[10], key, pos;
+    char array[10], key;
+    int len, pos;
     cout << "Enter the length of the array : ";
     cin >> len;
 
@@ -49,14 +53,14 @@ int main() {
     for(int i=0; i<len; i++)
         cin >> array[i];
 
-    insertion_sort(array, len);
+    insertion_sort<char>(array, len);
     cout << "Sorted array is : ";
-    print_array(array, len);
+    print_array<char>(array, len);
 
     cout << "\nEnter the element to be searched : ";
     cin >> key;
 
-    pos = binarySearch(array, 0, len-1, key);
+    pos = binarySearch<char>(array, 0, len-1, key);
 
     if(pos == -1) {
         cout << "Element not present in the Array" << endl;
