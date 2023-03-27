@@ -11,8 +11,6 @@ int match(string sentence, string pattern){
             if (sentence[i + j] != pattern[j]){
                 matched = 0;
                 break;
-                cout << "Enter your name " << endl
-                     << "Hello";
             }
         }
         if (matched){
