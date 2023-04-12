@@ -31,13 +31,30 @@ int knapsack(int no_of_items, int capacity_of_knapsack, int weights[], int profi
         }
     }
 
+    // Displaying the Matrix
     for(int i = 0; i < no_of_items + 1; i++){
         for(int j = 0; j < capacity_of_knapsack + 1; j++){
-            cout << T[i][j] << " ";
+            cout << T[i][j] << "\t";
         }
         cout << endl;
+    }cout << endl;
+
+    int s = 0;
+    int selection_set[MAX];
+
+    // Calculating the items to be selected
+    for(int i=no_of_items; i>0; i--){
+        if(T[i][capacity_of_knapsack] != T[i-1][capacity_of_knapsack]){
+            selection_set[s++] = i;
+            capacity_of_knapsack -= weights[i-1];
+        }
     }
 
+    cout << "Selection Set : ";
+    for(int i=0; i<s; i++){
+        cout << "Item " << selection_set[i] << ", ";
+    }
+    cout << "\nCapacity after the items are inserted : " << capacity_of_knapsack;
     return 0;
 }
 
@@ -63,7 +80,7 @@ int main()
     cout << "Enter the Profits : ";
     for(int i=0; i<no_of_items; i++){
         cin >> profits[i];
-    }
+    }cout << endl;
 
     knapsack(no_of_items, capacity_of_knapsack, weights, profits);
     return 0;
