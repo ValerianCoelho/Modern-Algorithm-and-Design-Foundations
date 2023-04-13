@@ -9,6 +9,7 @@ int knapsack(int no_of_items, int capacity_of_knapsack, int weights[], int profi
     int T[MAX][MAX]; // rows = no_of_items + 1, cols = capacity_of_knapsack + 1
     int weight; // Current items weight 
     int profit; // Current items profit/value
+    int max_profit;
 
     for(int i = 0; i < no_of_items + 1; i++){
         weight = weights[i-1];
@@ -30,6 +31,7 @@ int knapsack(int no_of_items, int capacity_of_knapsack, int weights[], int profi
             }
         }
     }
+    max_profit = T[no_of_items][capacity_of_knapsack];
 
     // Displaying the Matrix
     for(int i = 0; i < no_of_items + 1; i++){
@@ -54,6 +56,7 @@ int knapsack(int no_of_items, int capacity_of_knapsack, int weights[], int profi
     for(int i=0; i<s; i++){
         cout << "Item " << selection_set[i] << ", ";
     }
+    cout << "\nMaximum Profit : " << max_profit;
     cout << "\nCapacity after the items are inserted : " << capacity_of_knapsack;
     return 0;
 }
