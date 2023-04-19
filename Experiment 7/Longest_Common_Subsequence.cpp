@@ -8,18 +8,11 @@ using namespace std;
 #define Top 2
 #define Diagonal 3
 
-// function to return the maximum value between two integers
-int max(int a, int b) {
-    return (a > b) ? a : b;
-}
+// Function to return the maximum value between two integers
+int max(int a, int b) { return (a > b) ? a : b; }
 
-// function to return which of the two integers is larger
-int maxNo(int a, int b) {
-    if(a >= b){
-        return 1;
-    }
-    return 2;
-}
+// Function to return which of the two integers is larger
+int maxNo(int a, int b) { return (a >= b) ? 1 : 2; }
 
 void longest_common_subsequence(string str1, string str2) {
     // Initializing variables to store the length of the strings
