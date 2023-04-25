@@ -8,6 +8,13 @@ using namespace std;
 #define Top 2
 #define Diagonal 3
 
+// Defining Colours
+#define Red "\033[91m"
+#define Blue "\033[93m"
+#define Yellow "\033[94m"
+#define Green "\033[92m"
+#define Reset "\033[0m"
+
 // Function to return the maximum value between two integers
 int max(int a, int b) { return (a > b) ? a : b; }
 
@@ -15,7 +22,7 @@ int max(int a, int b) { return (a > b) ? a : b; }
 int maxNo(int a, int b) { return (a >= b) ? 1 : 2; }
 
 void longest_common_subsequence(string str1, string str2) {
-	cout << "Colors of the Directions are : \033[91mNone\033[0m, \033[93mLeft\033[0m, \033[94mTop\033[0m, \033[92mDiagonal\033[0m" << endl;
+	cout << "Colors of the Directions are : " Red "None" Reset "," Yellow " Left" Reset ", " Blue "Top" Reset ", " Green "Diagonal" Reset << endl;
     // Initializing variables to store the length of the strings
     int len1 = str1.length();
     int len2 = str2.length();
@@ -54,18 +61,18 @@ void longest_common_subsequence(string str1, string str2) {
         for(int j = 0; j < len1 + 1; j++) {
 			switch(D[i][j]){
 				case None:
-					cout << "\033[91m";
+					cout << Red;
 					break;
 				case Left:
-					cout << "\033[93m";
+					cout << Blue;
 					break;
 				case Top:
-					cout << "\033[94m";
+					cout << Yellow;
 					break;
 				case Diagonal:
-					cout << "\033[92m";
+					cout << Green;
 			}
-            cout << C[i][j] << " \033[0m";
+            cout << C[i][j] << Reset;
         }
         cout << endl;
     }
@@ -102,9 +109,6 @@ int main() {
     getline(cin, str1);
     cout << "Enter the second string : ";
     getline(cin, str2);
-    
-    
-
     longest_common_subsequence(str1, str2);
     return 0;
 }
