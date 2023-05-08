@@ -5,6 +5,8 @@ using namespace std;
 #define INFINITY 999
 
 int n;
+int inversePreorderIndex = 0;
+int preorderSize = 0;
 
 int W[MAX][MAX]; // Weight matrix
 int C[MAX][MAX]; // Cost matrix
@@ -12,6 +14,18 @@ int R[MAX][MAX]; // Root matrix
 
 int P[MAX]; // Probabilities of successful search
 int Q[MAX]; // Probabilities of unsuccessful search
+int InversePreorder[MAX];
+
+void getInversePreorder(int left, int right){
+    if(left == right){
+        InversePreorder[inversePreorderIndex++] = -1;
+        return;
+    }
+    int root = R[left][right];
+    InversePreorder[inversePreorderIndex++] = root;
+    getInversePreorder(root, right);
+    getInversePreorder(left, root-1);
+}
 
 // Function to print a matrix
 void Print_Matrix(int M[MAX][MAX]){
@@ -24,7 +38,7 @@ void Print_Matrix(int M[MAX][MAX]){
 }
 
 void Optimal_Binary_Search(){
-    int min, min_index;
+    int min, min_preorderIndex;
 
     // Initialization
     for(int i=0; i<=n; i++){
@@ -49,15 +63,23 @@ void Optimal_Binary_Search(){
                 // Find the minimum cost of all possible sub-trees rooted at node j
                 if(C[j][k-1] + C[k][j+i] < min){
                     min = C[j][k-1] + C[k][j+i];
-                    min_index = k;
+                    min_preorderIndex = k;
                 }
             }
             // Calculate the cost of the sub-tree rooted at node j
             C[j][j+i] = min + W[j][j+i];
             // Record the root of the sub-tree rooted at node j
-            R[j][j+i] = min_index;
+            R[j][j+i] = min_preorderIndex;
         }
     }
+
+    getInversePreorder(0, n);
+    preorderSize = inversePreorderIndex;
+    for(int i=0; i<inversePreorderIndex; i++){
+        cout << InversePreorder[i] << " ";
+    }
+    // inversePreorderIndex = 0;
+    // printTree(0, -1, inversePreorderIndex)
 
     // Print the weight, cost, and root matrices
     cout << "Weight Matrix :-" << endl;
@@ -88,3 +110,57 @@ int main()
     Optimal_Binary_Search();
     return 0;
 }
+
+// void printTree(int child, int depth, int inversePreorderIndex){
+//     for(int i=0; i<depth; i++){
+//         cout << "│    ";
+//     }
+
+//     if(child == 1){
+//         printf("├── ");
+//     }
+//     else if(child == -1){
+//         printf("└── ");
+//     }
+//     if(InversePreorder[inversePreorderIndex] == -1){
+//         cout << "NULL";
+//         return;
+//     }
+//     else{
+//         cout << InversePreorder[inversePreorderIndex];
+//     }
+// }
+
+// void printTree(struct node *ptr, int child, int depth){
+//     // child:
+//     // 0 - not a left or a right child
+//     //-1 - Left child
+//     // 1 - right child
+
+//     int i;
+//     for(i=0; i<depth; i++)
+//         printf("│    ");
+
+//     if(child == 1){
+//         printf("├── ");
+//     }
+//     else if(child == -1){
+//         printf("└── ");
+//     }
+
+//     if(ptr == NULL){
+//         printf("NULL\n");
+//         return;
+//     }
+//     else{
+//         printf("%d\n", ptr -> data);
+//     }
+
+//     if(ptr -> lchild == NULL && ptr -> rchild == NULL){
+//         return;
+//     }
+//     printTree(ptr -> rchild, 1, depth+1);
+//     printTree(ptr -> lchild, -1, depth+1);
+// }
+
+
