@@ -12,14 +12,14 @@ void printTree(int child, int depth){
     // -1 - Left child
     // 1 - right child
     for(int i=0; i<depth; i++){
-        cout << "³   ";
+        cout << "â”‚   ";
     }
 
     if(child == -1){
-        cout << "ÃÄÄ ";
+        cout << "â”œâ”€â”€ ";
     }
     else if(child == 1){
-        cout << "ÀÄÄ ";
+        cout << "â””â”€â”€ ";
     }
 
     if(arr[Index] == -1){
@@ -52,7 +52,7 @@ int main()
 
 // Output: 
 // 2
-// ÃÄÄ 4
-// ³   ÃÄÄ NULL
-// ³   ÀÄÄ 3
-// ÀÄÄ 1
+// â”œâ”€â”€ 4
+// â”‚   â”œâ”€â”€ NULL
+// â”‚   â””â”€â”€ 3
+// â””â”€â”€ 1
