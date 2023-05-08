@@ -9,8 +9,8 @@ int Index = 0;
 void printTree(int child, int depth){
     // child:
     // 0 - not a left or a right child
-    // -1 - Left child
-    // 1 - right child
+    // 1 - Left child
+    // -1 - right child
     for(int i=0; i<depth; i++){
         cout << "│   ";
     }
