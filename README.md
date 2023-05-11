@@ -12,6 +12,7 @@ The course covers the following topics:
 - Dijkstra's Algorithm
 - Knapsack Problem
 - Longest Common Subsequence
+- Optimal Binary Search Tree
 
 ## Contributions
 Contributions to this repository are welcome. If you find an error or have a suggestion, please open an issue or submit a pull request.
