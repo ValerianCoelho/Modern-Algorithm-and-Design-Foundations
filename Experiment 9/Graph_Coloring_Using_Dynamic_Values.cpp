@@ -51,7 +51,7 @@ int main(){
     cout << "Enter the number of vertices in the graph : ";
     cin >> n;
 
-    for(int i=0; i < n; i++) { vector[i] = {0}; }
+    for(int i=0; i < n; i++) { vector[i] = {0}; } // Initialize the colors of all vertices to 0
 
     cout << "Enter the number of colors to be used : ";
     cin >> m;
@@ -64,7 +64,6 @@ int main(){
     }
 
     cout << "The Solution Vectors are :-" << endl;
-
     mColor(0); // Start coloring the graph from vertex 0
     return 0;
 }
