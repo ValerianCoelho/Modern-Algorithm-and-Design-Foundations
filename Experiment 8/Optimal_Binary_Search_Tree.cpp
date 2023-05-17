@@ -3,6 +3,9 @@ using namespace std;
 
 #define MAX 20
 #define INFINITY 999
+#define Right 1
+#define Left -1
+#define Null -1
 
 int n;
 int IPIndex = 0; // Inverse Preorder Index
@@ -15,11 +18,7 @@ int P[MAX]; // Probabilities of successful search
 int Q[MAX]; // Probabilities of unsuccessful search
 int IP[MAX]; // Inverse Preorder of the final OBST
 
-void printTree(int child, int depth, string indent){
-    // child:
-    // 0 - root
-    // 1 - Left child
-    // -1 - right child
+void printTree(int child, string indent){
     int currentNode = IP[IPIndex];
     int rightChild = IP[IPIndex + 1];
     int leftChild = IP[IPIndex + 2];
@@ -27,18 +26,17 @@ void printTree(int child, int depth, string indent){
     cout << indent;
 
     // Check the value of child and print the appropriate branch symbol
-    if(child == -1){
+    if(child == Right){
         cout << "├── ";
         indent = indent + "│   ";
     }
-    else if(child == 1){
+    else if(child == Left){
         cout << "└── ";
         indent = indent + "    ";
     }
 
-    // Check if the current element in the inverse preorder array is -1, print "NULL" if it is
-    // Otherwise, print the current element
-    if(currentNode == -1){
+    // Check if currentNode is NULL(-1), if yes then print "NULL", else print the currentNode
+    if(currentNode == Null){
         cout << "NULL" << endl;
         return;
     }
@@ -46,15 +44,15 @@ void printTree(int child, int depth, string indent){
         cout << currentNode << endl;
     }
 
-    // if both children are -1, indicates we have reached the end of a subtree 
-    if(rightChild == -1 && leftChild == -1){
+    // if both children are NULL, indicates we have reached the end of a subtree 
+    if(rightChild == Null && leftChild == Null){
         IPIndex = IPIndex + 2;
         return;
     }
 
     // Recursively call printTree for the left and right subtrees
-    ++IPIndex; printTree(-1, depth+1, indent);
-    ++IPIndex; printTree(1, depth+1, indent);
+    ++IPIndex; printTree(Right, indent);
+    ++IPIndex; printTree(Left, indent);
 }
 
 // This is necessary for printing the tree
@@ -126,7 +124,7 @@ void Optimal_Binary_Search(){
     cout << "OBST :-" << endl;
     getInversePreorder(0, n); // Will compute the inverse preorder and store the result in IP Array
     IPIndex = 0; // setting IPIndex to zero because, its current value is the size of IP
-    printTree(0, -1, ""); // Will display the tree
+    printTree(0, ""); // Will display the tree
 }
 
 int main()
