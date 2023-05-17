@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#define MAX 20
+#define MAX 50
 #define INFINITY 999
 #define Right 1
 #define Left -1
@@ -18,23 +18,28 @@ int Q[MAX]; // Probabilities of unsuccessful search
 void displayTree(int left, int right, int child, string indent){
     int root = R[left][right];
     cout << indent;
+
+    // Check the child direction and display the appropriate tree structure
     if(child == Right){
-        cout << "â”œâ”€â”€ ";
-        indent = indent + "â”‚   ";
+        cout << "ÃÄÄ ";
+        indent = indent + "³   ";
     }
     else if(child == Left){
-        cout << "â””â”€â”€ ";
+        cout << "ÀÄÄ ";
         indent = indent + "    ";
     }
-    if(left == right){
+    if(left == right){ // Check if it is a leaf node and display "NULL"
         cout << "NULL" << endl;
         return;
     }
-    else{
+    else{ // Display the root value of the subtree
         cout << root << endl;;
     }
-    displayTree(root, right, Right, indent);
-    displayTree(left, root-1, Left, indent);
+    if(right - left == 1){ // Check if there are only two nodes in the subtree (these two nodes will be NULL nodes)
+        return;
+    }
+    displayTree(root, right, Right, indent); // Recursively display the right subtree rooted at 'root'
+    displayTree(left, root-1, Left, indent); // Recursively display the left subtree rooted at 'root-1'
 }
 
 // Function to print a matrix
@@ -60,8 +65,7 @@ void Optimal_Binary_Search(){
     // I-Weighted Matrix
     for(int i=1; i<=n; i++){
         for(int j=0; j<=n-i; j++){
-            // Calculate the weight of the sub-tree rooted at node j
-            W[j][j+i] = P[j+i-1] + Q[j+i] + W[j][j+i-1];
+            W[j][j+i] = P[j+i-1] + Q[j+i] + W[j][j+i-1]; // Calculate the weight of the sub-tree rooted at node j
         }
     }
 
@@ -76,22 +80,14 @@ void Optimal_Binary_Search(){
                     min_preorderIndex = k;
                 }
             }
-            // Calculate the cost of the sub-tree rooted at node j
-            C[j][j+i] = min + W[j][j+i];
-            // Record the root of the sub-tree rooted at node j
-            R[j][j+i] = min_preorderIndex;
+            C[j][j+i] = min + W[j][j+i]; // Calculate the cost of the sub-tree rooted at node j
+            R[j][j+i] = min_preorderIndex; // Record the root of the sub-tree rooted at node j
         }
     }
-
-    // Print the weight, cost, and root matrices
-    cout << "Weight Matrix :-" << endl;
-    Print_Matrix(W);
-    cout << "Cost Matrix :-" << endl;
-    Print_Matrix(C);
-    cout << "Root Matrix :-" << endl;
-    Print_Matrix(R);
-    cout << "OBST :-" << endl;
-    displayTree(0, n, 0,"");
+    cout << "Weight Matrix :-" << endl;  Print_Matrix(W);
+    cout << "Cost Matrix :-" << endl;    Print_Matrix(C);
+    cout << "Root Matrix :-" << endl;    Print_Matrix(R);
+    cout << "OBST :-" << endl;           displayTree(0, n, 0,"");
 }
 
 int main()
