@@ -21,11 +21,11 @@ void displayTree(int left, int right, int child, string indent){
 
     // Check the child direction and display the appropriate tree structure
     if(child == Right){
-        cout << "ÃÄÄ ";
-        indent = indent + "³   ";
+        cout << "â”œâ”€â”€ ";
+        indent = indent + "â”‚   ";
     }
     else if(child == Left){
-        cout << "ÀÄÄ ";
+        cout << "â””â”€â”€ ";
         indent = indent + "    ";
     }
     if(left == right){ // Check if it is a leaf node and display "NULL"
@@ -90,8 +90,7 @@ void Optimal_Binary_Search(){
     cout << "OBST :-" << endl;           displayTree(0, n, 0,"");
 }
 
-int main()
-{
+int main(){
     cout << "Enter the total number of nodes in the Binary Tree : ";
     cin >> n;
 
